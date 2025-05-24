@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import CategorySelector from "./components/CategorySelector";
 import EmojiGrid from "./components/EmojiGrid";
 import WinnerBanner from "./components/WinnerBanner";
+import Round from "./components/Round";
+import NextRoundPrompt from "./components/NextRoundPrompt";
 
 const categories = {
   Animals: ["🐶", "🐱", "🐵", "🐰"],
@@ -20,16 +22,20 @@ const winningCombinations = [
   [0, 4, 8], [2, 4, 6],
 ];
 
-export default function EmojiTicTacToe() {
+export default function App() {
   const [players, setPlayers] = useState([
     { category: null, emojis: [], selectedEmoji: null },
     { category: null, emojis: [], selectedEmoji: null },
   ]);
+  const [startingPlayer, setStartingPlayer] = useState(0); // new
+
   const [currentPlayer, setCurrentPlayer] = useState(0);
   const [grid, setGrid] = useState(Array(9).fill(null));
   const [emojiPositions, setEmojiPositions] = useState({ 0: [], 1: [] });
   const [gameStarted, setGameStarted] = useState(false);
   const [winner, setWinner] = useState(null);
+  const [scores, setScores] = useState({ 0: 0, 1: 0 });
+  const [showNextRoundPrompt, setShowNextRoundPrompt] = useState(false);
 
   const handleCategorySelect = (playerIndex, category) => {
     const updatedPlayers = [...players];
@@ -73,9 +79,25 @@ export default function EmojiTicTacToe() {
 
     if (checkWinner(updatedGrid, playerEmoji)) {
       setWinner(currentPlayer);
+      setScores((prev) => ({
+        ...prev,
+        [currentPlayer]: prev[currentPlayer] + 1,
+      }));
+      setShowNextRoundPrompt(true);
     } else {
       setCurrentPlayer((currentPlayer + 1) % 2);
     }
+  };
+
+  const handleNextRound = () => {
+    setGrid(Array(9).fill(null));
+    setEmojiPositions({ 0: [], 1: [] });
+    setWinner(null);
+    setCurrentPlayer(0); // or alternate starting player
+    setShowNextRoundPrompt(false);
+    const nextStartingPlayer = (startingPlayer + 1) % 2;
+    setStartingPlayer(nextStartingPlayer);
+    setCurrentPlayer(nextStartingPlayer);
   };
 
   return (
@@ -103,10 +125,25 @@ export default function EmojiTicTacToe() {
       ) : (
         <>
           <WinnerBanner winner={winner} />
-          {winner === null && (
+          <h2 className="mb-2">
+            Player 1 Score: {scores[0]} | Player 2 Score: {scores[1]}
+          </h2>
+
+          {winner === null ? (
             <h2 className="mb-4">Current Turn: Player {currentPlayer + 1}</h2>
+          ) : (
+            showNextRoundPrompt && (
+              <NextRoundPrompt winner={winner} onNextRound={handleNextRound} />
+            )
           )}
           <EmojiGrid grid={grid} onCellClick={handleCellClick} />
+          <Round
+            setGameStarted={setGameStarted}
+            setGrid={setGrid}
+            setCurrentPlayer={setCurrentPlayer}
+            setWinner={setWinner}
+            setEmojiPositions={setEmojiPositions}
+          />
         </>
       )}
     </div>
