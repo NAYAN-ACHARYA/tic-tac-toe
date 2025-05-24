@@ -1,6 +1,6 @@
 // src/components/NextRoundPrompt.jsx
 import React from "react";
-
+import "./NextRoundPrompt.css";
 export default function NextRoundPrompt({ winner, onNextRound }) {
   return (
     <div className="mb-4">

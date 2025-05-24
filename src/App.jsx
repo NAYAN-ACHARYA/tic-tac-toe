@@ -4,8 +4,9 @@ import EmojiGrid from "./components/EmojiGrid";
 import WinnerBanner from "./components/WinnerBanner";
 import Round from "./components/Round";
 import NextRoundPrompt from "./components/NextRoundPrompt";
-import "./App.css"; // Import your CSS file for styling
-import Slideshow from "./slide.jsx"; // Import your CSS file for styling
+import "./App.css";
+import Slideshow from "./slide.jsx";
+
 const categories = {
   Animals: ["🐶", "🐱", "🐵", "🐰"],
   Food: ["🍕", "🍟", "🍔", "🍩"],
@@ -33,7 +34,6 @@ export default function App() {
     { name: "", category: null, emojis: [], selectedEmoji: null },
     { name: "", category: null, emojis: [], selectedEmoji: null },
   ]);
-
   const [startingPlayer, setStartingPlayer] = useState(0);
   const [currentPlayer, setCurrentPlayer] = useState(0);
   const [grid, setGrid] = useState(Array(9).fill(null));
@@ -51,7 +51,12 @@ export default function App() {
   };
 
   const handleStartGame = () => {
-    if (players[0].category && players[1].category && players[0].name && players[1].name) {
+    if (
+      players[0].category &&
+      players[1].category &&
+      players[0].name &&
+      players[1].name
+    ) {
       setGameStarted(true);
     }
   };
@@ -105,75 +110,86 @@ export default function App() {
     setCurrentPlayer(nextStartingPlayer);
   };
 
-  return (<>
-    <Slideshow/>
-    <div className="p-4 max-w-xl mx-auto text-center">
-      {!gameStarted ? (
-        <>
-          <h1 className="cartoon-heading">Emoji Tic Tac Toe</h1>
- <div className="player-selectors-row">
-  {[0, 1].map((playerIndex) => (
-    <CategorySelector
-      key={playerIndex}
-      playerIndex={playerIndex}
-      category={players[playerIndex].category}
-      selectedEmoji={players[playerIndex].selectedEmoji}
-      playerName={players[playerIndex].name}
-      onNameChange={(index, name) => {
-        const updatedPlayers = [...players];
-        updatedPlayers[index].name = name;
-        setPlayers(updatedPlayers);
-      }}
-      onSelect={handleCategorySelect}
-    />
-  ))}
-</div>
+  return (
+    <>
+      <Slideshow />
+      <div className="p-4 max-w-xl mx-auto text-center">
+        {!gameStarted ? (
+          <>
+            <h1 className="cartoon-heading">Emoji Tic Tac Toe</h1>
 
+            <div className="player-selectors-row">
+              {[0, 1].map((playerIndex) => (
+                <CategorySelector
+                  key={playerIndex}
+                  playerIndex={playerIndex}
+                  category={players[playerIndex].category}
+                  selectedEmoji={players[playerIndex].selectedEmoji}
+                  playerName={players[playerIndex].name}
+                  onNameChange={(index, name) => {
+                    const updatedPlayers = [...players];
+                    updatedPlayers[index].name = name;
+                    setPlayers(updatedPlayers);
+                  }}
+                  onSelect={handleCategorySelect}
+                />
+              ))}
+            </div>
 
+            <div className="start-button-container">
+              <button
+                className="start-game-button"
+                disabled={
+                  !players[0].category ||
+                  !players[1].category ||
+                  !players[0].name ||
+                  !players[1].name
+                }
+                onClick={handleStartGame}
+              >
+                Start Game
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <WinnerBanner winner={winner !== null ? players[winner].name : null} />
 
-         <div className="start-button-container">
-  <button
-    className="start-game-button"
-    disabled={
-      !players[0].category || !players[1].category || !players[0].name || !players[1].name
-    }
-    onClick={handleStartGame}
-  >
-    Start Game
-  </button>
-</div>
+            <div className="game-row">
+              <div className="score-panel">
+                <h2>
+                  {players[0].name || "Player 1"} Score: {scores[0]} <br />
+                  {players[1].name || "Player 2"} Score: {scores[1]}
+                </h2>
+              </div>
 
+              <EmojiGrid grid={grid} onCellClick={handleCellClick} />
 
-        </>
-      ) : (
-        <>
-          <WinnerBanner winner={winner !== null ? players[winner].name : null} />
-          <h2 className="mb-2">
-            {players[0].name || "Player 1"} Score: {scores[0]} |{" "}
-            {players[1].name || "Player 2"} Score: {scores[1]}
-          </h2>
-
-          {winner === null ? (
-            <h2 className="mb-4">Current Turn: {players[currentPlayer].name}</h2>
-          ) : (
-            showNextRoundPrompt && (
-              <NextRoundPrompt
-                winner={players[winner].name}
-                onNextRound={handleNextRound}
-              />
-            )
-          )}
-          <EmojiGrid grid={grid} onCellClick={handleCellClick} />
-          <Round
-            setGameStarted={setGameStarted}
-            setGrid={setGrid}
-            setCurrentPlayer={setCurrentPlayer}
-            setWinner={setWinner}
-            setEmojiPositions={setEmojiPositions}
-          />
-        </>
-      )}
-    </div>
+              <div className="game-controls">
+                {winner === null ? (
+                  <h2 className="current-turn">
+                    Current Turn: {players[currentPlayer].name}
+                  </h2>
+                ) : (
+                  showNextRoundPrompt && (
+                    <NextRoundPrompt
+                      winner={players[winner].name}
+                      onNextRound={handleNextRound}
+                    />
+                  )
+                )}
+              </div>
+            </div>
+            <Round
+                  setGameStarted={setGameStarted}
+                  setGrid={setGrid}
+                  setCurrentPlayer={setCurrentPlayer}
+                  setWinner={setWinner}
+                  setEmojiPositions={setEmojiPositions}
+                />
+          </>
+        )}
+      </div>
     </>
   );
 }

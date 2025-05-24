@@ -84,5 +84,74 @@ body {
 }
 
 
+/* Container for game area: scoreboard on left, grid center, controls on right */
+.game-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* center overall horizontally */
+  align-items: flex-start; /* align top edges */
+  gap: 24px;
+  margin-top: 3em;
+  flex-wrap: wrap; /* allow wrapping on smaller screens */
+}
+
+/* Scoreboard container */
+.scoreboard {
+  flex: 0 0 150px; /* fixed width */
+  text-align: left;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffcc00;
+  text-shadow: 1px 1px 2px #000;
+  min-width: 140px;
+}
+
+/* Emoji grid container */
+.emoji-grid-container {
+  flex: 1 1 300px; /* flexible width, min 300px */
+  display: flex;
+  justify-content: center;
+}
+
+/* Controls container */
+.game-controls {
+  flex: 0 0 180px; /* fixed width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  min-width: 160px;
+}
+
+/* Current turn styling */
+.current-turn {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ff69b4;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* Responsive tweaks */
+@media (max-width: 700px) {
+  .game-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .scoreboard, .game-controls {
+    flex: none;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .emoji-grid-container {
+    flex: none;
+    width: 100%;
+  }
+}
+
+
+
+
 
 

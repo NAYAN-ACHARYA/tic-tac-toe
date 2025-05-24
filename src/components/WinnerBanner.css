@@ -1,10 +1,38 @@
 .winner-banner {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 16px;
-  color: #2d6a4f;
-  background-color: #d8f3dc;
-  padding: 12px;
-  border: 2px solid #40916c;
-  border-radius: 8px;
+  font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive;
+  font-size: 2.8rem;
+  color: #ffdd57;
+  background: linear-gradient(135deg, #ffdd57, #ff6f91);
+  padding: 1rem 3rem;
+  border-radius: 30px;
+  box-shadow:
+    0 5px 15px rgba(255, 221, 87, 0.6),
+    0 0 30px #ff6f91,
+    0 0 60px #ff6f91;
+  text-align: center;
+  display: inline-block;
+  user-select: none;
+  position: relative;
+  animation: floatUpDown 3s ease-in-out infinite;
+  margin: 1.5rem auto;
+  max-width: 90%;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #ffdd57, 0 0 20px #ff6f91;
+}
+
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow:
+      0 5px 15px rgba(255, 221, 87, 0.6),
+      0 0 30px #ff6f91,
+      0 0 60px #ff6f91;
+  }
+  50% {
+    transform: translateY(-15px);
+    box-shadow:
+      0 10px 20px rgba(255, 221, 87, 0.8),
+      0 0 40px #ff6f91,
+      0 0 80px #ff6f91;
+  }
 }

@@ -1,0 +1,62 @@
+/* NextRoundPrompt.css */
+
+.mb-4 {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive;
+  color: #b9f6ca; /* neon mint */
+  text-shadow: 0 0 6px #00e676, 0 0 12px #00c853;
+
+  width: 280px; /* Increase width */
+  max-width: 100%; /* Responsive */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  user-select: none;
+  animation: glowPulse 2.5s infinite ease-in-out;
+}
+
+button {
+  background: linear-gradient(135deg, #00c853, #64dd17);
+  border: 3px dashed #00e676;
+  border-radius: 20px;
+  color: white;
+  font-size: 1.4rem;
+  padding: 10px 32px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00e676, 0 0 30px #64dd17;
+  font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #64dd17, #00c853);
+  box-shadow: 0 0 25px #00ff00, 0 0 40px #00e676;
+  transform: scale(1.1) rotate(-2deg);
+}
+
+button:active {
+  transform: scale(0.95) rotate(3deg);
+  box-shadow: 0 0 15px #00a000 inset;
+}
+
+/* Glow pulse animation for the text */
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow: 0 0 6px #00e676, 0 0 12px #00c853;
+  }
+  50% {
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #76ff03;
+  }
+}

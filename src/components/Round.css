@@ -1,0 +1,51 @@
+.round {
+  display: flex;
+  flex-direction: row;      /* row layout */
+  justify-content: center;  /* center buttons horizontally */
+  gap: 16px;                /* space between buttons */
+  background: linear-gradient(135deg, #330033, #660066);
+  padding: 25px;
+  border-radius: 25px;
+  box-shadow: 0 0 15px #9b59b6, 0 0 35px #8e44ad;
+  text-align: center;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive;
+  color: #f3e5f5;
+  max-width: 520px;
+  margin: 2rem auto 0 auto;
+  user-select: none;
+}
+
+.round-button {
+  flex: 1 1 140px; /* Let buttons grow equally with a minimum base */
+  background: linear-gradient(135deg, #8e44ad, #5e3370);
+  border: 3px dashed #7d3c98;
+  border-radius: 15px;
+  color: #f8f0fb;
+  font-size: 1.4rem;
+  padding: 12px 0;
+  cursor: pointer;
+  box-shadow: 0 0 12px #7d3c98;
+  transition: all 0.3s ease;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  user-select: none;
+  animation: spooky-flicker 3s infinite ease-in-out;
+  margin: 0; /* remove vertical margin since flex handles spacing */
+}
+
+.round-button:hover {
+  background: linear-gradient(135deg, #a569bd, #7d3c98);
+  box-shadow: 0 0 25px #b795c7, 0 0 40px #9b59b6;
+  transform: scale(1.05) rotate(-3deg);
+}
+
+.round-button:active {
+  transform: scale(0.95) rotate(2deg);
+  box-shadow: 0 0 15px #6c3483 inset;
+}
+
+@keyframes spooky-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}

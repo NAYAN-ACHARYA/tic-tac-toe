@@ -1,4 +1,5 @@
 import React from "react";
+import "./Round.css";
 const Round=({setGameStarted,setGrid,setCurrentPlayer,setWinner,setEmojiPositions})=>{
     const handleResetGame=()=>{
         setGrid(Array(9).fill(null)); // Reset the grid
@@ -15,7 +16,6 @@ const Round=({setGameStarted,setGrid,setCurrentPlayer,setWinner,setEmojiPosition
     }
     return (
         <div className="round">
-        <h2>Round Component</h2>
         <button className="round-button" onClick={handleResetRound}>Reset current round</button>
         <button className="round-button" onClick={handleResetGame}>exit to homepage</button>
         </div>
