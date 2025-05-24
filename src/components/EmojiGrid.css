@@ -1,0 +1,24 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.cell {
+  border: 1px solid #ccc;
+  height: 80px;
+  width: 80px;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.cell:hover {
+  background-color: #f0f0f0;
+}

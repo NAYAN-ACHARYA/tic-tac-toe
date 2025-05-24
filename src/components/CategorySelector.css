@@ -1,0 +1,33 @@
+.category-selector {
+  margin-bottom: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.player-heading {
+  margin-bottom: 8px;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.category-button {
+  padding: 8px 16px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.category-button:hover {
+  background-color: #2563eb;
+}
+
+.selected-emoji {
+  margin-top: 4px;
+  font-size: 18px;
+}

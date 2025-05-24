@@ -1,0 +1,10 @@
+.winner-banner {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #2d6a4f;
+  background-color: #d8f3dc;
+  padding: 12px;
+  border: 2px solid #40916c;
+  border-radius: 8px;
+}
