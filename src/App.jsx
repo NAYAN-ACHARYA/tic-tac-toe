@@ -4,7 +4,8 @@ import EmojiGrid from "./components/EmojiGrid";
 import WinnerBanner from "./components/WinnerBanner";
 import Round from "./components/Round";
 import NextRoundPrompt from "./components/NextRoundPrompt";
-
+import "./App.css"; // Import your CSS file for styling
+import Slideshow from "./slide.jsx"; // Import your CSS file for styling
 const categories = {
   Animals: ["🐶", "🐱", "🐵", "🐰"],
   Food: ["🍕", "🍟", "🍔", "🍩"],
@@ -17,18 +18,23 @@ const getRandomEmoji = (category) => {
 };
 
 const winningCombinations = [
-  [0, 1, 2], [3, 4, 5], [6, 7, 8],
-  [0, 3, 6], [1, 4, 7], [2, 5, 8],
-  [0, 4, 8], [2, 4, 6],
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
 ];
 
 export default function App() {
   const [players, setPlayers] = useState([
-    { category: null, emojis: [], selectedEmoji: null },
-    { category: null, emojis: [], selectedEmoji: null },
+    { name: "", category: null, emojis: [], selectedEmoji: null },
+    { name: "", category: null, emojis: [], selectedEmoji: null },
   ]);
-  const [startingPlayer, setStartingPlayer] = useState(0); // new
 
+  const [startingPlayer, setStartingPlayer] = useState(0);
   const [currentPlayer, setCurrentPlayer] = useState(0);
   const [grid, setGrid] = useState(Array(9).fill(null));
   const [emojiPositions, setEmojiPositions] = useState({ 0: [], 1: [] });
@@ -45,7 +51,7 @@ export default function App() {
   };
 
   const handleStartGame = () => {
-    if (players[0].category && players[1].category) {
+    if (players[0].category && players[1].category && players[0].name && players[1].name) {
       setGameStarted(true);
     }
   };
@@ -93,47 +99,68 @@ export default function App() {
     setGrid(Array(9).fill(null));
     setEmojiPositions({ 0: [], 1: [] });
     setWinner(null);
-    setCurrentPlayer(0); // or alternate starting player
     setShowNextRoundPrompt(false);
     const nextStartingPlayer = (startingPlayer + 1) % 2;
     setStartingPlayer(nextStartingPlayer);
     setCurrentPlayer(nextStartingPlayer);
   };
 
-  return (
+  return (<>
+    <Slideshow/>
     <div className="p-4 max-w-xl mx-auto text-center">
       {!gameStarted ? (
         <>
-          <h1 className="text-2xl mb-4">Emoji Tic Tac Toe</h1>
-          {[0, 1].map((playerIndex) => (
-            <CategorySelector
-              key={playerIndex}
-              playerIndex={playerIndex}
-              category={players[playerIndex].category}
-              selectedEmoji={players[playerIndex].selectedEmoji}
-              onSelect={handleCategorySelect}
-            />
-          ))}
-          <button
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
-            disabled={!players[0].category || !players[1].category}
-            onClick={handleStartGame}
-          >
-            Start Game
-          </button>
+          <h1 className="cartoon-heading">Emoji Tic Tac Toe</h1>
+ <div className="player-selectors-row">
+  {[0, 1].map((playerIndex) => (
+    <CategorySelector
+      key={playerIndex}
+      playerIndex={playerIndex}
+      category={players[playerIndex].category}
+      selectedEmoji={players[playerIndex].selectedEmoji}
+      playerName={players[playerIndex].name}
+      onNameChange={(index, name) => {
+        const updatedPlayers = [...players];
+        updatedPlayers[index].name = name;
+        setPlayers(updatedPlayers);
+      }}
+      onSelect={handleCategorySelect}
+    />
+  ))}
+</div>
+
+
+
+         <div className="start-button-container">
+  <button
+    className="start-game-button"
+    disabled={
+      !players[0].category || !players[1].category || !players[0].name || !players[1].name
+    }
+    onClick={handleStartGame}
+  >
+    Start Game
+  </button>
+</div>
+
+
         </>
       ) : (
         <>
-          <WinnerBanner winner={winner} />
+          <WinnerBanner winner={winner !== null ? players[winner].name : null} />
           <h2 className="mb-2">
-            Player 1 Score: {scores[0]} | Player 2 Score: {scores[1]}
+            {players[0].name || "Player 1"} Score: {scores[0]} |{" "}
+            {players[1].name || "Player 2"} Score: {scores[1]}
           </h2>
 
           {winner === null ? (
-            <h2 className="mb-4">Current Turn: Player {currentPlayer + 1}</h2>
+            <h2 className="mb-4">Current Turn: {players[currentPlayer].name}</h2>
           ) : (
             showNextRoundPrompt && (
-              <NextRoundPrompt winner={winner} onNextRound={handleNextRound} />
+              <NextRoundPrompt
+                winner={players[winner].name}
+                onNextRound={handleNextRound}
+              />
             )
           )}
           <EmojiGrid grid={grid} onCellClick={handleCellClick} />
@@ -147,5 +174,6 @@ export default function App() {
         </>
       )}
     </div>
+    </>
   );
 }

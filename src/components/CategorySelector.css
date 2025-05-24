@@ -1,33 +1,69 @@
 .category-selector {
-  margin-bottom: 16px;
-  font-family: Arial, sans-serif;
+  border: 4px solid #5c3c10;
+  background: rgba(255, 245, 210, 0.9);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+  font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive;
+  color: #2c1e0f;
+  text-align: center;
+  position: relative;
+  flex: 1 1 200px;
 }
 
 .player-heading {
-  margin-bottom: 8px;
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: #3e260d;
+  text-shadow: 1px 1px #fffbc1;
+}
+
+.name-input {
+  font-family: inherit;
+  font-size: 1rem;
+  width: 80%;
+  max-width: 300px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  border: 2px dashed #5c3c10;
+  border-radius: 8px;
+  background-color: #fffbe7;
 }
 
 .button-group {
   display: flex;
+  justify-content: center;
   gap: 12px;
-  margin-bottom: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
 }
 
 .category-button {
-  padding: 8px 16px;
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 10px 16px;
+  border: 2px solid #4e2808;
+  border-radius: 10px;
+  background-color: #ffdf91;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 2px 2px 4px #00000033;
 }
 
 .category-button:hover {
-  background-color: #2563eb;
+  background-color: #ffe9b0;
+  transform: translateY(-2px) scale(1.05);
+}
+
+.category-button.selected {
+  background-color: #ffa726;
+  border-color: #bf360c;
+  color: white;
 }
 
 .selected-emoji {
-  margin-top: 4px;
-  font-size: 18px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-top: 10px;
 }
