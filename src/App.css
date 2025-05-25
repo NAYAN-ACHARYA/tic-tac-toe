@@ -1,36 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
 
-.current-turn {
-  font-family: 'Creepster', cursive, monospace;
-  color: #ff1a1a; /* blood red */
-  font-size:100px;
-  text-align: center;
-  text-shadow:
-    0 0 5px #ff1a1a,
-    0 0 10px #ff4d4d,
-    0 0 15px #cc0000,
-    0 0 20px #800000;
-  animation: flickerRed 2.5s infinite alternate;
-  user-select: none;
-  margin: 20px 0;
-}
 
-@keyframes flickerRed {
-  0%, 100% {
-    text-shadow:
-      0 0 5px #ff1a1a,
-      0 0 10px #ff4d4d,
-      0 0 15px #cc0000,
-      0 0 20px #800000;
-  }
-  50% {
-    text-shadow:
-      0 0 2px #b30000,
-      0 0 6px #e60000,
-      0 0 10px #990000,
-      0 0 15px #4d0000;
-  }
-}
 
 body {
   margin: 0;
@@ -119,32 +89,24 @@ body {
 
 
 /* Container for game area: scoreboard on left, grid center, controls on right */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
 .game-row {
   display: flex;
+   margin-left: -110px; 
   flex-direction: row;
   justify-content: center; /* center overall horizontally */
   align-items: flex-start; /* align top edges */
   gap: 24px;
+  width: 100%;
+  align-items: center;
   margin-top: 3em;
   flex-wrap: wrap; /* allow wrapping on smaller screens */
-}
-
-/* Scoreboard container */
-.scoreboard {
-  flex: 0 0 150px; /* fixed width */
-  text-align: left;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #ffcc00;
-  text-shadow: 1px 1px 2px #000;
-  min-width: 140px;
-}
-
-/* Emoji grid container */
-.emoji-grid-container {
-  flex: 1 1 300px; /* flexible width, min 300px */
-  display: flex;
-  justify-content: center;
 }
 
 /* Controls container */
@@ -157,14 +119,7 @@ body {
   min-width: 160px;
 }
 
-/* Current turn styling */
-.current-turn {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #ff69b4;
-  margin-top: 1rem;
-  text-align: center;
-}
+
 
 /* Responsive tweaks */
 @media (max-width: 700px) {

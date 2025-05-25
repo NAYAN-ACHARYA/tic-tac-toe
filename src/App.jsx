@@ -9,11 +9,16 @@ import bgm from "/images/got.mp3";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import "./App.css";
 import ScorePanel from "./components/ScorePanel";
-import CurrentTurn from "./components/CurrentTurn.jsx"; 
+import CurrentTurn from "./components/CurrentTurn.jsx";
+
 const categories = {
-  Animals: ["🐶", "🐱", "🐵", "🐰"],
-  Food: ["🍕", "🍟", "🍔", "🍩"],
-  Sports: ["⚽️", "🏀", "🏈", "🎾"],
+  Animals: ["🐶", "🐱", "🐵", "🐰", "🐸", "🐼", "🦁", "🐯"],
+  Food: ["🍕", "🍟", "🍔", "🍩", "🍣", "🍎", "🍪", "🍇"],
+  Sports: ["⚽️", "🏀", "🏈", "🎾", "🏓", "🏸", "🥊", "⛳️"],
+  Space: ["🚀", "🛸", "🛰️", "🌌", "👨‍🚀", "🌠", "🪐", "🔭"],
+  Fantasy: ["🧙‍♂️", "🐉", "🧝‍♀️", "🧚‍♂️", "🪄", "🦄", "👑", "🧞‍♂️"],
+  Halloween: ["🎃", "👻", "🧛‍♂️", "🧟", "🕸️", "🧙‍♀️", "🕷️", "☠️"],
+  Nature: ["🌳", "🌲", "🍁", "🌸", "🌞", "🌧️", "🔥", "❄️"],
 };
 
 const getRandomEmoji = (category) => {
@@ -132,7 +137,6 @@ export default function App() {
     <>
       <Slideshow />
 
-      {/* Background Music + Toggle Button */}
       <audio ref={audioRef} src={bgm} autoPlay loop />
       <button onClick={toggleMusic} className="volume-button">
         {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
@@ -177,14 +181,18 @@ export default function App() {
             </div>
           </>
         ) : (
-          <>
-            <WinnerBanner winner={winner !== null ? players[winner].name : null} />
+          <div className="game-container">
+            <WinnerBanner
+              winner={winner !== null ? players[winner].name : null}
+            />
+
+            <div style={{ height: "20px" }} />
 
             <div className="game-row">
               <ScorePanel players={players} scores={scores} />
-
+              <div style={{ width: "16px" }} />
               <EmojiGrid grid={grid} onCellClick={handleCellClick} />
-
+              <div style={{ width: "16px" }} />
               <div className="game-controls">
                 {winner === null ? (
                   <CurrentTurn
@@ -202,6 +210,8 @@ export default function App() {
               </div>
             </div>
 
+            <div style={{ height: "30px" }} />
+
             <Round
               setGameStarted={setGameStarted}
               setGrid={setGrid}
@@ -209,7 +219,7 @@ export default function App() {
               setWinner={setWinner}
               setEmojiPositions={setEmojiPositions}
             />
-          </>
+          </div>
         )}
       </div>
     </>

@@ -5,14 +5,14 @@
   width: 280px;
   align-self: center;
   max-width: 90%;
-  margin-left: -240 auto; /* centered properly */
+  /* centered properly */
   box-shadow: 0 0 12px 2px #7b39c7; /* less spread and softer */
   font-family: 'Creepster', cursive, 'Courier New', monospace;
   color: #dda0ff;
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-
+  justify-self: center;
   /* Sharper text shadows with tighter blur */
   text-shadow:
     0 0 3px #dda0ff,
