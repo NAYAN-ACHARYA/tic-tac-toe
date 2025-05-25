@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import CategorySelector from "./components/CategorySelector";
 import EmojiGrid from "./components/EmojiGrid";
 import WinnerBanner from "./components/WinnerBanner";
 import Round from "./components/Round";
 import NextRoundPrompt from "./components/NextRoundPrompt";
-import "./App.css";
 import Slideshow from "./slide.jsx";
+import bgm from "/images/got.mp3";
+import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+import "./App.css";
 
 const categories = {
   Animals: ["🐶", "🐱", "🐵", "🐰"],
@@ -42,6 +44,21 @@ export default function App() {
   const [winner, setWinner] = useState(null);
   const [scores, setScores] = useState({ 0: 0, 1: 0 });
   const [showNextRoundPrompt, setShowNextRoundPrompt] = useState(false);
+
+  const audioRef = useRef(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+  const toggleMusic = () => {
+    const audio = audioRef.current;
+    if (audio) {
+      if (isMuted) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+      setIsMuted(!isMuted);
+    }
+  };
 
   const handleCategorySelect = (playerIndex, category) => {
     const updatedPlayers = [...players];
@@ -113,6 +130,13 @@ export default function App() {
   return (
     <>
       <Slideshow />
+
+      {/* Background Music + Toggle Button */}
+      <audio ref={audioRef} src={bgm} autoPlay loop />
+      <button onClick={toggleMusic} className="volume-button">
+        {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+      </button>
+
       <div className="p-4 max-w-xl mx-auto text-center">
         {!gameStarted ? (
           <>
@@ -180,13 +204,14 @@ export default function App() {
                 )}
               </div>
             </div>
+
             <Round
-                  setGameStarted={setGameStarted}
-                  setGrid={setGrid}
-                  setCurrentPlayer={setCurrentPlayer}
-                  setWinner={setWinner}
-                  setEmojiPositions={setEmojiPositions}
-                />
+              setGameStarted={setGameStarted}
+              setGrid={setGrid}
+              setCurrentPlayer={setCurrentPlayer}
+              setWinner={setWinner}
+              setEmojiPositions={setEmojiPositions}
+            />
           </>
         )}
       </div>
