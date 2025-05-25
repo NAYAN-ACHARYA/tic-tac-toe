@@ -1,0 +1,23 @@
+.score-panel {
+  background: linear-gradient(135deg, #2b1a3f, #4a255f);
+  border-radius: 12px;
+  padding: 20px 30px;
+  width: 280px;
+  align-self: center;
+  max-width: 90%;
+  margin-left: -240 auto; /* centered properly */
+  box-shadow: 0 0 12px 2px #7b39c7; /* less spread and softer */
+  font-family: 'Creepster', cursive, 'Courier New', monospace;
+  color: #dda0ff;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+
+  /* Sharper text shadows with tighter blur */
+  text-shadow:
+    0 0 3px #dda0ff,
+    0 0 6px #7b39c7,
+    0 0 9px #9b59b6;
+
+  user-select: none;
+}

@@ -1,3 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+
+.current-turn {
+  font-family: 'Creepster', cursive, monospace;
+  color: #ff1a1a; /* blood red */
+  font-size:100px;
+  text-align: center;
+  text-shadow:
+    0 0 5px #ff1a1a,
+    0 0 10px #ff4d4d,
+    0 0 15px #cc0000,
+    0 0 20px #800000;
+  animation: flickerRed 2.5s infinite alternate;
+  user-select: none;
+  margin: 20px 0;
+}
+
+@keyframes flickerRed {
+  0%, 100% {
+    text-shadow:
+      0 0 5px #ff1a1a,
+      0 0 10px #ff4d4d,
+      0 0 15px #cc0000,
+      0 0 20px #800000;
+  }
+  50% {
+    text-shadow:
+      0 0 2px #b30000,
+      0 0 6px #e60000,
+      0 0 10px #990000,
+      0 0 15px #4d0000;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;

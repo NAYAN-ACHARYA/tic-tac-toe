@@ -8,7 +8,8 @@ import Slideshow from "./slide.jsx";
 import bgm from "/images/got.mp3";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import "./App.css";
-
+import ScorePanel from "./components/ScorePanel";
+import CurrentTurn from "./components/CurrentTurn.jsx"; 
 const categories = {
   Animals: ["🐶", "🐱", "🐵", "🐰"],
   Food: ["🍕", "🍟", "🍔", "🍩"],
@@ -180,20 +181,16 @@ export default function App() {
             <WinnerBanner winner={winner !== null ? players[winner].name : null} />
 
             <div className="game-row">
-              <div className="score-panel">
-                <h2>
-                  {players[0].name || "Player 1"} Score: {scores[0]} <br />
-                  {players[1].name || "Player 2"} Score: {scores[1]}
-                </h2>
-              </div>
+              <ScorePanel players={players} scores={scores} />
 
               <EmojiGrid grid={grid} onCellClick={handleCellClick} />
 
               <div className="game-controls">
                 {winner === null ? (
-                  <h2 className="current-turn">
-                    Current Turn: {players[currentPlayer].name}
-                  </h2>
+                  <CurrentTurn
+                    players={players}
+                    currentPlayer={currentPlayer}
+                  />
                 ) : (
                   showNextRoundPrompt && (
                     <NextRoundPrompt

@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+
+.current-turn-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.current-turn {
+  font-family: 'Creepster', cursive, monospace;
+  color: #ff3b3b;
+  font-size: 3rem;
+  text-align: center;
+  user-select: none;
+  margin: 20px 0;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: inline-block;
+
+  /* Crisp red glow with fewer, tighter shadows */
+  text-shadow:
+    0 0 3px #ff0000,
+    0 0 6px #cc0000,
+    0 0 9px #990000;
+    
+  /* Remove any animation */
+  animation: none !important;
+}

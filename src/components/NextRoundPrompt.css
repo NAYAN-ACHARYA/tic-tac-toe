@@ -1,62 +1,61 @@
-/* NextRoundPrompt.css */
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
 
-.mb-4 {
-  margin-bottom: 1rem;
-  text-align: center;
-  font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive;
-  color: #b9f6ca; /* neon mint */
-  text-shadow: 0 0 6px #00e676, 0 0 12px #00c853;
-
-  width: 280px; /* Increase width */
-  max-width: 100%; /* Responsive */
-  margin-left: auto;
-  margin-right: auto;
+.next-round-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
 }
 
-
-.mb-2 {
-  margin-bottom: 0.5rem;
-  font-size: 1.8rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  user-select: none;
-  animation: glowPulse 2.5s infinite ease-in-out;
-}
-
-button {
-  background: linear-gradient(135deg, #00c853, #64dd17);
-  border: 3px dashed #00e676;
+.next-round-container.spooky-theme {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 228, 225, 0.85);
+  backdrop-filter: blur(8px);
+  padding:0px 50px 50px 50px;
   border-radius: 20px;
-  color: white;
-  font-size: 1.4rem;
-  padding: 10px 32px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  font-family: 'Creepster', cursive;
+  border: 4px dashed #ff5722;
+  animation: float 3s ease-in-out infinite;
+}
+
+.winner-message {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #d32f2f;
+  text-shadow: 2px 2px 4px #000;
+  text-align: center;
+}
+
+.next-round-button {
+  font-size: 1.6rem;
+  background-color: #8e24aa;
+  color: #fff;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 12px;
   cursor: pointer;
-  box-shadow: 0 0 15px #00e676, 0 0 30px #64dd17;
-  font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  user-select: none;
+  transition: all 0.2s ease;
+  font-family: 'Creepster', cursive;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-button:hover {
-  background: linear-gradient(135deg, #64dd17, #00c853);
-  box-shadow: 0 0 25px #00ff00, 0 0 40px #00e676;
-  transform: scale(1.1) rotate(-2deg);
+.next-round-button:hover {
+  background-color: #ab47bc;
+  transform: scale(1.08);
 }
 
-button:active {
-  transform: scale(0.95) rotate(3deg);
-  box-shadow: 0 0 15px #00a000 inset;
+.next-round-button:active {
+  transform: scale(0.95);
 }
 
-/* Glow pulse animation for the text */
-@keyframes glowPulse {
+@keyframes float {
   0%, 100% {
-    text-shadow: 0 0 6px #00e676, 0 0 12px #00c853;
+    transform: translateY(0px);
   }
   50% {
-    text-shadow: 0 0 10px #00ff00, 0 0 20px #76ff03;
+    transform: translateY(-6px);
   }
 }

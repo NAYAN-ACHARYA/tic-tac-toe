@@ -1,38 +1,53 @@
-.winner-banner {
-  font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive;
-  font-size: 2.8rem;
-  color: #ffdd57;
-  background: linear-gradient(135deg, #ffdd57, #ff6f91);
-  padding: 1rem 3rem;
-  border-radius: 30px;
-  box-shadow:
-    0 5px 15px rgba(255, 221, 87, 0.6),
-    0 0 30px #ff6f91,
-    0 0 60px #ff6f91;
-  text-align: center;
-  display: inline-block;
+.winner-banner-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  pointer-events: none;
   user-select: none;
-  position: relative;
-  animation: floatUpDown 3s ease-in-out infinite;
-  margin: 1.5rem auto;
-  max-width: 90%;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px #ffdd57, 0 0 20px #ff6f91;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
 }
 
-@keyframes floatUpDown {
-  0%, 100% {
-    transform: translateY(0);
-    box-shadow:
-      0 5px 15px rgba(255, 221, 87, 0.6),
-      0 0 30px #ff6f91,
-      0 0 60px #ff6f91;
+.winner-banner {
+  background: linear-gradient(90deg, #ff0080, #7928ca);
+  color: white;
+  font-weight: 700;
+  font-size: 1.8rem;
+  padding: 12px 20px;
+  border-radius: 30px;
+  box-shadow: 0 0 20px #ff0080aa;
+  animation: fadeInOut 4s forwards;
+  pointer-events: auto;
+}
+
+.fireworks-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
   }
-  50% {
-    transform: translateY(-15px);
-    box-shadow:
-      0 10px 20px rgba(255, 221, 87, 0.8),
-      0 0 40px #ff6f91,
-      0 0 80px #ff6f91;
+  10% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
   }
 }
