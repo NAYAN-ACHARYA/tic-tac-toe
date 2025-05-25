@@ -10,7 +10,7 @@ import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import "./App.css";
 import ScorePanel from "./components/ScorePanel";
 import CurrentTurn from "./components/CurrentTurn.jsx";
-
+import HelpModal from "./components/HelpModal.jsx";
 const categories = {
   Animals: ["🐶", "🐱", "🐵", "🐰", "🐸", "🐼", "🦁", "🐯"],
   Food: ["🍕", "🍟", "🍔", "🍩", "🍣", "🍎", "🍪", "🍇"],
@@ -20,6 +20,7 @@ const categories = {
   Halloween: ["🎃", "👻", "🧛‍♂️", "🧟", "🕸️", "🧙‍♀️", "🕷️", "☠️"],
   Nature: ["🌳", "🌲", "🍁", "🌸", "🌞", "🌧️", "🔥", "❄️"],
 };
+
 const winningCombinations = [
   [0, 1, 2],
   [3, 4, 5],
@@ -44,6 +45,7 @@ export default function App() {
   const [winner, setWinner] = useState(null);
   const [scores, setScores] = useState({ 0: 0, 1: 0 });
   const [showNextRoundPrompt, setShowNextRoundPrompt] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
 
   const audioRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
@@ -63,7 +65,6 @@ export default function App() {
   const handleCategorySelect = (playerIndex, category) => {
     const updatedPlayers = [...players];
     updatedPlayers[playerIndex].category = category;
-    updatedPlayers[playerIndex].selectedEmoji = getRandomEmoji(category);
     setPlayers(updatedPlayers);
   };
 
@@ -131,37 +132,46 @@ export default function App() {
     <>
       <Slideshow />
 
+      {/* Background Music */}
       <audio ref={audioRef} src={bgm} autoPlay loop />
       <button onClick={toggleMusic} className="volume-button">
         {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
       </button>
 
+      {/* Help Button */}
+      <button className="help-button" onClick={() => setShowHelp(true)}>
+        Help ❓
+      </button>
+
+      {/* Help Modal */}
+      {showHelp && (
+        <HelpModal onClose={() => setShowHelp(false)} />
+      )}
+
       <div className="p-4 max-w-xl mx-auto text-center">
         {!gameStarted ? (
           <>
             <h1 className="cartoon-heading">Emoji Tic Tac Toe</h1>
-
             <div className="player-selectors-row">
               {[0, 1].map((playerIndex) => (
                 <CategorySelector
-  key={playerIndex}
-  playerIndex={playerIndex}
-  category={players[playerIndex].category}
-  selectedEmoji={players[playerIndex].selectedEmoji}
-  playerName={players[playerIndex].name}
-  onNameChange={(index, name) => {
-    const updatedPlayers = [...players];
-    updatedPlayers[index].name = name;
-    setPlayers(updatedPlayers);
-  }}
-  onSelect={handleCategorySelect}
-  onEmojiSelect={(index, emoji) => {
-    const updatedPlayers = [...players];
-    updatedPlayers[index].selectedEmoji = emoji;
-    setPlayers(updatedPlayers);
-  }}
-/>
-
+                  key={playerIndex}
+                  playerIndex={playerIndex}
+                  category={players[playerIndex].category}
+                  selectedEmoji={players[playerIndex].selectedEmoji}
+                  playerName={players[playerIndex].name}
+                  onNameChange={(index, name) => {
+                    const updatedPlayers = [...players];
+                    updatedPlayers[index].name = name;
+                    setPlayers(updatedPlayers);
+                  }}
+                  onSelect={handleCategorySelect}
+                  onEmojiSelect={(index, emoji) => {
+                    const updatedPlayers = [...players];
+                    updatedPlayers[index].selectedEmoji = emoji;
+                    setPlayers(updatedPlayers);
+                  }}
+                />
               ))}
             </div>
 
@@ -185,9 +195,7 @@ export default function App() {
             <WinnerBanner
               winner={winner !== null ? players[winner].name : null}
             />
-
             <div style={{ height: "20px" }} />
-
             <div className="game-row">
               <ScorePanel players={players} scores={scores} />
               <div style={{ width: "16px" }} />
@@ -209,9 +217,7 @@ export default function App() {
                 )}
               </div>
             </div>
-
             <div style={{ height: "30px" }} />
-
             <Round
               setGameStarted={setGameStarted}
               setGrid={setGrid}

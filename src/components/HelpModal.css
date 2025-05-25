@@ -1,0 +1,74 @@
+.help-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 0, 30, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.help-content {
+  background: linear-gradient(145deg, #1a1a2e, #0f0c29);
+  color: #f8e4ff;
+  border-radius: 20px;
+  padding: 40px 30px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 0 25px 10px rgba(255, 0, 255, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  font-family: 'Creepster', cursive;
+  position: relative;
+  animation: fadeInPop 0.4s ease-out;
+}
+
+.help-content h2 {
+  font-size: 38px;
+  margin-bottom: 24px;
+  color: #ff7de9;
+  text-shadow: 2px 2px 6px #ff00cc;
+  text-align: center;
+}
+
+.help-content ul {
+  padding-left: 24px;
+  line-height: 2;
+  font-size: 26px;
+  font-family: 'Creepster', cursive;
+}
+
+.help-content li {
+  margin-bottom: 16px;
+}
+
+.close-button {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #ff7de9;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.close-button:hover {
+  transform: scale(1.3);
+  color: #ffffff;
+}
+
+@keyframes fadeInPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
