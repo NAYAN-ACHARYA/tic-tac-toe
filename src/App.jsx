@@ -20,12 +20,6 @@ const categories = {
   Halloween: ["🎃", "👻", "🧛‍♂️", "🧟", "🕸️", "🧙‍♀️", "🕷️", "☠️"],
   Nature: ["🌳", "🌲", "🍁", "🌸", "🌞", "🌧️", "🔥", "❄️"],
 };
-
-const getRandomEmoji = (category) => {
-  const options = categories[category];
-  return options[Math.floor(Math.random() * options.length)];
-};
-
 const winningCombinations = [
   [0, 1, 2],
   [3, 4, 5],
@@ -150,18 +144,24 @@ export default function App() {
             <div className="player-selectors-row">
               {[0, 1].map((playerIndex) => (
                 <CategorySelector
-                  key={playerIndex}
-                  playerIndex={playerIndex}
-                  category={players[playerIndex].category}
-                  selectedEmoji={players[playerIndex].selectedEmoji}
-                  playerName={players[playerIndex].name}
-                  onNameChange={(index, name) => {
-                    const updatedPlayers = [...players];
-                    updatedPlayers[index].name = name;
-                    setPlayers(updatedPlayers);
-                  }}
-                  onSelect={handleCategorySelect}
-                />
+  key={playerIndex}
+  playerIndex={playerIndex}
+  category={players[playerIndex].category}
+  selectedEmoji={players[playerIndex].selectedEmoji}
+  playerName={players[playerIndex].name}
+  onNameChange={(index, name) => {
+    const updatedPlayers = [...players];
+    updatedPlayers[index].name = name;
+    setPlayers(updatedPlayers);
+  }}
+  onSelect={handleCategorySelect}
+  onEmojiSelect={(index, emoji) => {
+    const updatedPlayers = [...players];
+    updatedPlayers[index].selectedEmoji = emoji;
+    setPlayers(updatedPlayers);
+  }}
+/>
+
               ))}
             </div>
 

@@ -8,16 +8,17 @@ const CategorySelector = ({
   onSelect,
   playerName,
   onNameChange,
+  onEmojiSelect,
 }) => {
   const categories = {
-  Animals: ["🐶", "🐱", "🐵", "🐰", "🐸", "🐼", "🦁", "🐯"],
-  Food: ["🍕", "🍟", "🍔", "🍩", "🍣", "🍎", "🍪", "🍇"],
-  Sports: ["⚽️", "🏀", "🏈", "🎾", "🏓", "🏸", "🥊", "⛳️"],
-  Space: ["🚀", "🛸", "🛰️", "🌌", "👨‍🚀", "🌠", "🪐", "🔭"],
-  Fantasy: ["🧙‍♂️", "🐉", "🧝‍♀️", "🧚‍♂️", "🪄", "🦄", "👑", "🧞‍♂️"],
-  Halloween: ["🎃", "👻", "🧛‍♂️", "🧟", "🕸️", "🧙‍♀️", "🕷️", "☠️"],
-  Nature: ["🌳", "🌲", "🍁", "🌸", "🌞", "🌧️", "🔥", "❄️"],
-};
+    Animals: ["🐶", "🐱", "🐵", "🐰", "🐸", "🐼", "🦁", "🐯"],
+    Food: ["🍕", "🍟", "🍔", "🍩", "🍣", "🍎", "🍪", "🍇"],
+    Sports: ["⚽️", "🏀", "🏈", "🎾", "🏓", "🏸", "🥊", "⛳️"],
+    Space: ["🚀", "🛸", "🛰️", "🌌", "👨‍🚀", "🌠", "🪐", "🔭"],
+    Fantasy: ["🧙‍♂️", "🐉", "🧝‍♀️", "🧚‍♂️", "🪄", "🦄", "👑", "🧞‍♂️"],
+    Halloween: ["🎃", "👻", "🧛‍♂️", "🧟", "🕸️", "🧙‍♀️", "🕷️", "☠️"],
+    Nature: ["🌳", "🌲", "🍁", "🌸", "🌞", "🌧️", "🔥", "❄️"],
+  };
 
   return (
     <div className="category-selector">
@@ -43,6 +44,25 @@ const CategorySelector = ({
           </button>
         ))}
       </div>
+
+      {category && (
+        <>
+          <p className="mt-2">Pick your emoji:</p>
+          <div className="emoji-grid">
+            {categories[category].map((emoji) => (
+              <button
+                key={emoji}
+                onClick={() => onEmojiSelect(playerIndex, emoji)}
+                className={`emoji-button ${
+                  selectedEmoji === emoji ? "selected-emoji-btn" : ""
+                }`}
+              >
+                {emoji}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
 
       <div className="selected-emoji mt-2">
         Selected Emoji: {selectedEmoji || "❓"}

@@ -59,7 +59,8 @@ body {
 .start-button-container {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top:0px;
+  align-items: top;
 }
 
 .start-game-button {
@@ -73,7 +74,7 @@ body {
   cursor: pointer;
   box-shadow: 4px 4px 0 #000;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-top: 2rem;
+  margin-top:0px;
 }
 
 .start-game-button:hover {
